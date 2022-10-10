@@ -5,45 +5,26 @@
 //  Created by Michael Osinowo on 25/09/2022.
 //
 
+#include "./InterestRateTemplate/IntRateEng.hpp"
+#include "./InvestmentInstruments/Investment.hpp"
+
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "./InterestRateCalculator/IntRateCalculator.hpp"
-#include "./CashFlowCalculator/CashFlow.hpp"
 
 
-
-int main(int argc, const char * argv[]) {
-
-    if (argc != 2) {
-        
-        std::cout << "usage: cashflow <rate> " << std::endl;
-        return 1;
-    }
-    
-    double rate = atof(argv[1]);
-
-    CashFlow cfc(rate);
-
-    do{
-        int period;
-        std::cin >> period;
-        if (period == -1){
-            break;
-        }
-        double value;
-        std::cin >> value;
-        cfc.addCashPayment(value, period);
-    }
-    while(1);
-
-    double result = cfc.presentValue();
-    std::cout << "The present value is " << result << std::endl;
-    return 0;
+int main() {
 
 
+BondInst bond(40000, 250);
+MortgageInst mortgage(250, 50000, 5000);
+IntRateEngine<BondInst> engA(bond);
+IntRateEngine<MortgageInst> engB(mortgage);
 
-    return 0;
+ std::cout << " bond annual int rate: " << engA.getAnnualIntRate()*100 << "%" << std::endl;
+ std::cout << " mortgage annual int rate: " << engB.getAnnualIntRate()*100 << "%" << std::endl;
+ return 0;
+
 }
 
 

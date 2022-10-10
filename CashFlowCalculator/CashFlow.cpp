@@ -33,8 +33,9 @@ void CashFlow::addCashPayment(double value, int timePeriod){
 
 double CashFlow::presentValue(double futureValue, int timePeriod)
 {
-    double res  = futureValue/pow((1+ m_rate),timePeriod);
-    return res;
+    double pValue  = futureValue/pow(1+m_rate,timePeriod);
+    std::cout << "value " << pValue << std::endl;
+    return pValue;
 }
 
 double CashFlow::presentValue(){
